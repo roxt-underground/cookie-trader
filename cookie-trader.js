@@ -1,12 +1,13 @@
 // ==UserScript==
 // @name         Cookie Clicker helper
 // @namespace    http://tampermonkey.net/
-// @version      0.2
+// @version      0.3
 // @description  try to take over the world!
 // @author       RoxT
 // @match        https://orteil.dashnet.org/cookieclicker/
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
-// @grant        none
+// @grant        GM_getValue
+// @grant        GM.getValue
 // ==/UserScript==
 
 class Trader {
@@ -82,4 +83,20 @@ async function coockieClikHelpers(_game) {
     _game.trader.start();
 }
 
-coockieClikHelpers(Game);
+//coockieClikHelpers(Game);
+
+(function() {
+    'use strict';
+  
+    console.info("Try to load mods");
+  
+    // 2. Создаем тег <script>
+    const script = document.createElement('script');
+    script.classList.add('userClick');
+    
+    // 3. Записываем код функции 
+    script.textContent = `${Trader.toString()}\n${coockieClikHelpers.toString()}\n coockieClikHelpers(Game);`; 
+
+    // 4. Добавляем в самый конец документа (в <body> или <html>)
+    (document.body || document.documentElement).appendChild(script);
+})();
